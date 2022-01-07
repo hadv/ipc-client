@@ -14,17 +14,17 @@ import (
 )
 
 func main() {
-	client, err := ethclient.Dial("/Users/hadv/work/github/hadv/go-ethereum/data/sun/geth.ipc")
+	client, err := ethclient.Dial("/root/.opera/fakenet-7/opera.ipc")
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	ks := keystore.NewKeyStore("/Users/hadv/work/github/hadv/go-ethereum/data/sun/keystore", keystore.StandardScryptN, keystore.StandardScryptP)
+	ks := keystore.NewKeyStore("/root/.opera/fakenet-7/keystore", keystore.StandardScryptN, keystore.StandardScryptP)
 
-	to := common.HexToAddress("0xd5089c1fdf8cebf58c6bbb50a86c1c55893634b8")
-	from := common.HexToAddress("0xe348073d55ade0ef0e5696ba51d5565003233d0c")
-	data := []byte("Lorem ipsum")
-	value := big.NewInt(10000000000000000)
+	to := common.HexToAddress("0xc94e731C761A0985c5b1212b9b6208362465b328")
+	from := common.HexToAddress("0x802d1c2560B9b5884DA3CB85E8f426e97C354101")
+	data := []byte("Fantom")
+	value := big.NewInt(1000000000000000000)
 
 	gasPrice, err := client.SuggestGasPrice(context.Background())
 	if err != nil {
