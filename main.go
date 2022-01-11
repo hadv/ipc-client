@@ -37,11 +37,12 @@ func main() {
 		return
 	}
 	msg := ethereum.CallMsg{
-		From:     from,
-		To:       &to,
-		GasPrice: gasPrice,
-		Value:    value,
-		Data:     data,
+		From:      from,
+		To:        &to,
+		GasFeeCap: gasPrice,
+		GasTipCap: gasTip,
+		Value:     value,
+		Data:      data,
 	}
 	gasLimit, err := client.EstimateGas(context.Background(), msg)
 	if err != nil {
