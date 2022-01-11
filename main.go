@@ -31,7 +31,11 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
-
+	gasTip, err := client.SuggestGasTipCap(context.Background())
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 	msg := ethereum.CallMsg{
 		From:     from,
 		To:       &to,
@@ -51,7 +55,16 @@ func main() {
 		return
 	}
 
-	newTx := types.NewTransaction(nonce, to, value, gasLimit, gasPrice, data)
+	// newTx := types.NewTransaction(nonce, to, value, gasLimit, gasPrice, data)
+	newTx := types.NewTx(&types.DynamicFeeTx{
+		Nonce:     nonce,
+		To:        &to,
+		Value:     value,
+		Gas:       gasLimit,
+		GasTipCap: gasTip,
+		GasFeeCap: gasPrice,
+		Data:      data,
+	})
 	networkID, err := client.NetworkID(context.Background())
 	if err != nil {
 		fmt.Println(err.Error())
