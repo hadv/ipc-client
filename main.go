@@ -31,11 +31,15 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
+	fmt.Printf("gasPrice: %v", gasPrice)
+	fmt.Println()
 	gasTip, err := client.SuggestGasTipCap(context.Background())
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
+	fmt.Printf("gasTip: %v", gasTip)
+	fmt.Println()
 	msg := ethereum.CallMsg{
 		From:      from,
 		To:        &to,
@@ -49,7 +53,11 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
+	fmt.Printf("gasLimit: %v", gasLimit)
+	fmt.Println()
 	gasLimit = gasLimit + 21000
+	fmt.Printf("gasLimit: %v", gasLimit)
+	fmt.Println()
 	nonce, err := client.PendingNonceAt(context.Background(), from)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -57,7 +65,6 @@ func main() {
 	}
 
 	// newTx := types.NewTransaction(nonce, to, value, gasLimit, gasPrice, data)
-
 	networkID, err := client.NetworkID(context.Background())
 	if err != nil {
 		fmt.Println(err.Error())
