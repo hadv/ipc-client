@@ -49,7 +49,7 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
-
+	gasLimit = gasLimit + 21000
 	nonce, err := client.PendingNonceAt(context.Background(), from)
 	if err != nil {
 		fmt.Println(err.Error())
