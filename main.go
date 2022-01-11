@@ -56,7 +56,14 @@ func main() {
 	}
 
 	// newTx := types.NewTransaction(nonce, to, value, gasLimit, gasPrice, data)
+
+	networkID, err := client.NetworkID(context.Background())
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 	newTx := types.NewTx(&types.DynamicFeeTx{
+		ChainID:   networkID,
 		Nonce:     nonce,
 		To:        &to,
 		Value:     value,
@@ -65,11 +72,6 @@ func main() {
 		GasFeeCap: gasPrice,
 		Data:      data,
 	})
-	networkID, err := client.NetworkID(context.Background())
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
 
 	signedTx, err := ks.SignTxWithPassphrase(accounts.Account{Address: from}, "i3nxx1rk", newTx, networkID)
 	if err != nil {
