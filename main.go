@@ -72,6 +72,8 @@ func main() {
 		GasFeeCap: gasPrice,
 		Data:      data,
 	})
+	fmt.Printf("tx type: %v", newTx.Type())
+	fmt.Println()
 
 	signedTx, err := ks.SignTxWithPassphrase(accounts.Account{Address: from}, "i3nxx1rk", newTx, networkID)
 	if err != nil {
