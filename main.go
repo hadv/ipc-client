@@ -75,12 +75,12 @@ func main() {
 
 	signedTx, err := ks.SignTxWithPassphrase(accounts.Account{Address: from}, "i3nxx1rk", newTx, networkID)
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("sign: " + err.Error())
 		return
 	}
 
 	if err := client.SendTransaction(context.Background(), signedTx); err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("send: " + err.Error())
 		return
 	}
 	fmt.Println("Send tnx succesfully!")
