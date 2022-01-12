@@ -88,6 +88,14 @@ func main() {
 		fmt.Println("sign: " + err.Error())
 		return
 	}
+	signer := types.NewLondonSigner(networkID)
+	sender, err := signer.Sender(signedTx)
+	if err != nil {
+		fmt.Println("sender: " + err.Error())
+		return
+	}
+	fmt.Printf("sender: %v", sender.Hex())
+	fmt.Println()
 
 	if err := client.SendTransaction(context.Background(), signedTx); err != nil {
 		fmt.Println("send: " + err.Error())
