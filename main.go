@@ -5,26 +5,26 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/Fantom-foundation/go-opera/ftmclient"
 	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 func main() {
-	client, err := ethclient.Dial("/root/.opera/fakenet-7/opera.ipc")
+	client, err := ftmclient.Dial("/Users/hadv/Library/Lachesis/fakenet-1/opera.ipc")
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	ks := keystore.NewKeyStore("/root/.opera/fakenet-7/keystore", keystore.StandardScryptN, keystore.StandardScryptP)
+	ks := keystore.NewKeyStore("/Users/hadv/Library/Lachesis/fakenet-1/keystore/", keystore.StandardScryptN, keystore.StandardScryptP)
 
 	to := common.HexToAddress("0xc94e731C761A0985c5b1212b9b6208362465b328")
-	from := common.HexToAddress("0x802d1c2560B9b5884DA3CB85E8f426e97C354101")
+	from := common.HexToAddress("0x15060c1ad0484d426fBB1170B528705ce9450C35")
 	data := []byte("Fantom")
-	value := big.NewInt(1000000000000000000)
+	value := big.NewInt(10000000)
 
 	gasPrice, err := client.SuggestGasPrice(context.Background())
 	if err != nil {
@@ -55,9 +55,9 @@ func main() {
 	}
 	fmt.Printf("gasLimit: %v", gasLimit)
 	fmt.Println()
-	gasLimit = gasLimit + 21000
-	fmt.Printf("gasLimit: %v", gasLimit)
-	fmt.Println()
+	// gasLimit = gasLimit + 21000
+	// fmt.Printf("gasLimit: %v", gasLimit)
+	// fmt.Println()
 	nonce, err := client.PendingNonceAt(context.Background(), from)
 	if err != nil {
 		fmt.Println(err.Error())
